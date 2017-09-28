@@ -287,7 +287,7 @@ describe('[State Mutation]: Create new reference when Object is mutated', () => 
       type: 'users',
       id: '1',
       attributes: {
-        name: 'Mr. John Doe'
+        name: 'Mr. Name changer'
       },
       relationships: {
         companies: {

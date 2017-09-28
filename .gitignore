@@ -18,6 +18,7 @@ node_modules
 # Vim
 *.sw*
 
-lib
+# removing ignore for lib in order to pull into seperate project from temp github repo with compiled js
+# lib
 .DS_Store
 .nvmrc

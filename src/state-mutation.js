@@ -2,6 +2,7 @@ import imm from 'object-path-immutable';
 import pluralize from 'pluralize';
 import { hasOwnProperties } from './utils';
 import equal from 'deep-equal';
+import merge from "lodash/merge";
 
 export const makeUpdateReverseRelationship = (
   resource,
@@ -119,9 +120,11 @@ export const updateOrInsertResource = (state, resource) => {
   if (stateContainsResource(state, resource)) {
     const resources = state[resource.type].data;
     const idx = resources.findIndex(item => item.id === resource.id);
+    delete resources[idx].isInvalidating;
+    const newResource = merge({}, resources[idx], resource);
 
-    if (!equal(resources[idx], resource)) {
-      newState = imm.set(newState, updatePath.concat(idx), resource);
+    if (!equal(resources[idx], newResource)) {
+      newState = imm.set(newState, updatePath.concat(idx), newResource);
     }
   } else {
     newState = imm.push(newState, updatePath, resource);
